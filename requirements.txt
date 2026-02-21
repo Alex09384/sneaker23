@@ -1,4 +1,5 @@
 Flask==2.3.3
 flask-mail==0.9.1
 python-dotenv==1.0.0
+setuptools
 gunicorn==20.1.0
