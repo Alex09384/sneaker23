@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/first_page.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="text-block">
+        <h1>Найди свою идеальную пару</h1>
+        <p>Измерь стопу и получи персональные рекомендации по размеру и модели обуви</p>
+        <div class="actions">
+            <a href="/measure"><button class="primary">Начать измерение</button></a>
+        </div>
+    </div>
+    <div class="preview-block" id="shoePreview">
+        <!-- Случайная модель будет загружена через JS -->
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/first_page.js') }}"></script>
+{% endblock %}

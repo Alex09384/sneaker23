@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/shoe_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="shoe-detail-container">
+        <div class="gallery-section">
+            <div class="main-image" id="mainImage">
+                <img src="/static/models%20photo/{{ shoe.model }}/1.jpg" alt="{{ shoe.model }}">
+            </div>
+            <div class="thumbnail-gallery" id="thumbnailGallery"></div>
+        </div>
+        
+        <div class="info-section">
+            <h1>{{ shoe.model }}</h1>
+            
+            <div style="margin: 20px 0;">
+                <h2>О модели</h2>
+                <p>Тип: {{ 'Спортивная' if shoe.sport == 1 else 'Повседневная' }}</p>
+                <p>Всего размеров: {{ all_sizes_count }}</p>
+            </div>
+            
+            {% if user %}
+            <div style="background: var(--card-bg); padding: 20px; border-radius: 10px; margin: 20px 0;">
+                <h3>Ваши измерения:</h3>
+                <p>Длина: {{ user.foot_length }} см</p>
+                <p>Ширина: {{ user.foot_width }} см</p>
+                <p>Косой обхват: {{ user.oblique_circumference }} см</p>
+                <p>Тип стопы: {{ user.foot_type }}</p>
+            </div>
+            
+            <h2>Наиболее подходящие размеры</h2>
+            
+            <!-- Таблица с ТОП-5 размерами по совместимости -->
+            <table class="size-table top-sizes-table">
+                <thead>
+                    <tr>
+                        <th>Размер EU</th>
+                        <th>Совместимость</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for size in top_sizes %}
+                    <tr class="size-row {% if size.is_best %}best-match{% endif %}">
+                        <td><strong>{{ size.size_data.eu }}</strong></td>
+                        <td>
+                            <div class="compatibility-value" style="font-weight: bold; color: {{ '#4CAF50' if size.compatibility >= 80 else '#FF9800' if size.compatibility >= 60 else '#F44336' }}">
+                                {{ size.compatibility }}%
+                            </div>
+                            <div class="compatibility-bar">
+                                <div class="compatibility-fill" style="width: {{ size.compatibility }}%; background: {{ '#4CAF50' if size.compatibility >= 80 else '#FF9800' if size.compatibility >= 60 else '#F44336' }}"></div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            
+            <!-- Кнопка для показа всех размеров -->
+            {% if all_sizes_count > 5 %}
+            <div class="sizes-control">
+                <button id="toggleSizesBtn" class="btn btn-secondary">
+                    <span class="btn-text">Показать все размеры ({{ all_sizes_count }})</span>
+                    <span class="btn-icon">▼</span>
+                </button>
+            </div>
+            
+            <!-- Контейнер со всеми размерами (скрыт по умолчанию) -->
+            <div class="all-sizes-container" id="allSizesContainer" style="display: none;">
+                <h3>Все доступные размеры</h3>
+                <table class="size-table all-sizes-table">
+                    <thead>
+                        <tr>
+                            <th>Размер EU</th>
+                            <th>Совместимость</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for size in all_sizes %}
+                        <tr class="{% if size.is_best %}best-match{% endif %}">
+                            <td><strong>{{ size.size_data.eu }}</strong></td>
+                            <td>
+                                <div class="compatibility-value" style="font-weight: bold; color: {{ '#4CAF50' if size.compatibility >= 80 else '#FF9800' if size.compatibility >= 60 else '#F44336' }}">
+                                    {{ size.compatibility }}%
+                                </div>
+                                <div class="compatibility-bar">
+                                    <div class="compatibility-fill" style="width: {{ size.compatibility }}%; background: {{ '#4CAF50' if size.compatibility >= 80 else '#FF9800' if size.compatibility >= 60 else '#F44336' }}"></div>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+            
+            {% else %}
+            <div style="text-align: center; padding: 40px; background: var(--card-bg); border-radius: 10px;">
+                <h3>Для получения рекомендаций по размеру</h3>
+                <p>Заполните измерения стопы</p>
+                <a href="/measure" class="btn btn-primary" style="margin-top: 15px;">Заполнить измерения</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Модальное окно для просмотра изображений -->
+<div class="modal-overlay" id="imageModal">
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose">&times;</button>
+        <button class="modal-nav modal-prev" id="modalPrev">←</button>
+        <button class="modal-nav modal-next" id="modalNext">→</button>
+        <img class="modal-image" id="modalImage" src="" alt="">
+        <div class="image-counter" id="imageCounter"></div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('toggleSizesBtn');
+    const allSizesContainer = document.getElementById('allSizesContainer');
+    
+    if (toggleBtn && allSizesContainer) {
+        toggleBtn.addEventListener('click', function() {
+            if (allSizesContainer.style.display === 'none') {
+                // Показываем все размеры с анимацией
+                allSizesContainer.style.display = 'block';
+                allSizesContainer.style.opacity = '0';
+                allSizesContainer.style.maxHeight = '0';
+                allSizesContainer.style.overflow = 'hidden';
+                
+                setTimeout(() => {
+                    allSizesContainer.style.transition = 'all 0.5s ease';
+                    allSizesContainer.style.opacity = '1';
+                    allSizesContainer.style.maxHeight = '2000px';
+                }, 10);
+                
+                // Меняем кнопку
+                toggleBtn.querySelector('.btn-text').textContent = 'Скрыть все размеры';
+                toggleBtn.querySelector('.btn-icon').textContent = '▲';
+                toggleBtn.classList.add('active');
+            } else {
+                // Скрываем все размеры с анимацией
+                allSizesContainer.style.opacity = '0';
+                allSizesContainer.style.maxHeight = '0';
+                
+                setTimeout(() => {
+                    allSizesContainer.style.display = 'none';
+                    allSizesContainer.style.transition = '';
+                }, 500);
+                
+                // Меняем кнопку
+                toggleBtn.querySelector('.btn-text').textContent = 'Показать все размеры ({{ all_sizes_count }})';
+                toggleBtn.querySelector('.btn-icon').textContent = '▼';
+                toggleBtn.classList.remove('active');
+            }
+        });
+    }
+});
+</script>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/shoe_detail.js') }}"></script>
+{% endblock %}

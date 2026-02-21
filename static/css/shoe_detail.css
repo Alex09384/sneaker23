@@ -1,0 +1,436 @@
+/* Основные стили для страницы обуви */
+.container {
+    max-width: 1400px !important;
+}
+
+.shoe-detail-container {
+    display: grid;
+    grid-template-columns: 500px 1fr;
+    gap: 50px;
+    align-items: start;
+}
+
+/* Галерея */
+.gallery-section {
+    position: sticky;
+    top: 100px;
+}
+
+.main-image {
+    width: 100%;
+    height: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    cursor: pointer;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.main-image:hover img {
+    transform: scale(1.05);
+}
+
+.thumbnail-gallery {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 15px 0;
+}
+
+.thumbnail {
+    width: 100px;
+    height: 80px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.thumbnail.active {
+    opacity: 1;
+    border: 3px solid #0014ff;
+}
+
+.thumbnail:hover {
+    opacity: 1;
+}
+
+/* Информация о модели */
+.info-section h1 {
+    font-size: 32px;
+    margin-bottom: 25px;
+    color: var(--text-color);
+}
+
+.info-section h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.info-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.info-section p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+/* Таблица размеров (упрощенная - только EU и совместимость) */
+.size-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 16px;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.size-table th {
+    background: var(--accent-color);
+    color: white;
+    font-weight: 600;
+    padding: 12px 15px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.size-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-color);
+    text-align: center;
+    color: var(--text-color);
+}
+
+.size-table tbody tr:hover {
+    background: rgba(0,0,0,0.02);
+}
+
+/* Полоса совместимости */
+.compatibility-bar {
+    background: var(--border-color);
+    border-radius: 10px;
+    height: 8px;
+    margin-top: 8px;
+    overflow: hidden;
+    width: 100%;
+}
+
+.compatibility-fill {
+    height: 100%;
+    transition: width 0.5s ease;
+}
+
+.compatibility-value {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Лучший размер */
+.best-match {
+    background: rgba(76, 175, 80, 0.1) !important;
+    border-left: 4px solid #4CAF50;
+}
+
+.best-match td:first-child {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+.best-match .compatibility-value {
+    color: #4CAF50 !important;
+}
+
+/* Кнопка показа всех размеров */
+.sizes-control {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#toggleSizesBtn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    min-width: 220px;
+    background: var(--card-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#toggleSizesBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px var(--shadow-color);
+}
+
+#toggleSizesBtn.active {
+    background: var(--accent-color);
+    color: white;
+    border-color: var(--accent-color);
+}
+
+.btn-icon {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+/* Контейнер со всеми размерами */
+.all-sizes-container {
+    margin-top: 20px;
+    transition: all 0.5s ease;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+}
+
+.all-sizes-container[style*="display: block"] {
+    opacity: 1;
+    max-height: 2000px;
+}
+
+.all-sizes-container h3 {
+    margin: 20px 0 10px 0;
+    color: var(--text-color);
+}
+
+/* Информация о лучшем размере */
+.best-size-info {
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.best-size-info p {
+    color: var(--text-color);
+    font-size: 16px;
+    margin-bottom: 0;
+}
+
+.best-size-info strong {
+    color: #4CAF50;
+    font-size: 18px;
+}
+
+/* Модальное окно */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    position: relative;
+    max-width: 95%;
+    max-height: 95%;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: 95vh;
+    border-radius: 12px;
+}
+
+.modal-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 35px;
+    cursor: pointer;
+    padding: 8px;
+}
+
+.modal-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    color: white;
+    font-size: 28px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease;
+}
+
+.modal-nav:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.modal-prev {
+    left: 30px;
+}
+
+.modal-next {
+    right: 30px;
+}
+
+.image-counter {
+    position: absolute;
+    bottom: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Темы */
+[data-theme="soft"] .compatibility-bar,
+[data-theme="dark"] .compatibility-bar {
+    background: var(--border-color);
+}
+
+[data-theme="soft"] .size-table th,
+[data-theme="dark"] .size-table th {
+    background: var(--accent-color);
+    color: white;
+}
+
+[data-theme="dark"] .best-match {
+    background: rgba(76, 175, 80, 0.2) !important;
+}
+
+[data-theme="dark"] .best-match td:first-child {
+    color: #81c784;
+}
+
+[data-theme="dark"] .best-match .compatibility-value {
+    color: #81c784 !important;
+}
+
+[data-theme="soft"] .best-match {
+    background: rgba(76, 175, 80, 0.15) !important;
+}
+
+/* Адаптивность */
+@media (max-width: 1200px) {
+    .container {
+        max-width: 1200px !important;
+    }
+
+    .shoe-detail-container {
+        grid-template-columns: 450px 1fr;
+        gap: 40px;
+    }
+
+    .main-image {
+        height: 350px;
+    }
+}
+
+@media (max-width: 900px) {
+    .shoe-detail-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .gallery-section {
+        position: static;
+    }
+
+    .main-image {
+        height: 300px;
+    }
+
+    .thumbnail {
+        width: 90px;
+        height: 70px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 100% !important;
+        padding: 0 15px;
+    }
+
+    .size-table {
+        font-size: 14px;
+    }
+    
+    .size-table th,
+    .size-table td {
+        padding: 12px 10px;
+    }
+    
+    #toggleSizesBtn {
+        min-width: 200px;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+    
+    .info-section h1 {
+        font-size: 28px;
+    }
+    
+    .info-section h2 {
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .size-table {
+        font-size: 13px;
+    }
+    
+    .size-table th,
+    .size-table td {
+        padding: 10px 8px;
+    }
+    
+    .compatibility-value {
+        font-size: 14px;
+    }
+}

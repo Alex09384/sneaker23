@@ -1,0 +1,40 @@
+.subtitle {
+  color: #666;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.divider::before, .divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #eee;
+}
+
+.divider span {
+  padding: 0 12px;
+  color: #888;
+  background: white;
+}
+
+.message {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 6px;
+  text-align: center;
+  display: none;
+}
+.subtitle {
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.form-group label {
+    color: var(--text-color);
+}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/how.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <h1>Как это работает</h1>
+        <div class="how-content">
+            <div class="step-title">Шаг 1: Измерьте стопу</div>
+            <div class="step-description">
+                Введите длину, ширину и косой обхват вашей стопы. Эти параметры можно измерить 
+                обычной линейкой или сантиметровой лентой.
+            </div>
+            
+            <div class="step-title">Шаг 2: Получите рекомендации</div>
+            <div class="step-description">
+                На основе ваших измерений наша система подберет модели обуви с оптимальной 
+                совместимостью и подходящим размером.
+            </div>
+            
+            <div class="step-title">Шаг 3: Выберите идеальную пару</div>
+            <div class="step-description">
+                Просмотрите детальную информацию о каждой модели и выберите обувь, 
+                которая подходит именно вам.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

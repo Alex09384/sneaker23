@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="card">
+        <h1>О нас</h1>
+        <div class="about-content">
+            <div class="team-member">Наша команда</div>
+            <div class="team-description">
+                Мы — команда энтузиастов, которые хотят сделать процесс выбора обуви проще и удобнее. 
+                SneakerFit помогает подобрать идеальную обувь на основе ваших индивидуальных параметров.
+            </div>
+            
+            <div class="team-member">Наша миссия</div>
+            <div class="team-description">
+                Помочь каждому найти обувь, которая будет идеально сидеть на ноге, обеспечивая комфорт 
+                и поддержку в течение всего дня.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

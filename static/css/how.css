@@ -1,0 +1,46 @@
+.how-content {
+  margin: 50px 25px;
+}
+
+.step-title {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.step-description {
+  margin: 10px 0 75px 0;
+  line-height: 1.6;
+}
+
+.how-content a {
+  color: #0014ff;
+  text-decoration: none;
+}
+
+.how-content a:hover {
+  text-decoration: underline;
+}
+.card h1 {
+    color: var(--text-color);
+}
+
+.team-member,
+.step-title {
+    color: var(--text-color);
+}
+
+.team-description,
+.step-description {
+    color: var(--text-color);
+    opacity: 0.9;
+}
+
+.card ol,
+.card ul {
+    color: var(--text-color);
+}
+
+.card a {
+    color: var(--accent-color);
+}

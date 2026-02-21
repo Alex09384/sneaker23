@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Подбор — SneakerFit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<div class="topbar">
+    <div class="logo">SneakerFit</div>
+
+    <div class="center-menu">
+        <a href="/how"><button class="ghost-btn">Как это работает</button></a>
+        <a href="/fit"><button class="ghost-btn">Подбор</button></a>
+        <a href="/about"><button class="ghost-btn">О нас</button></a>
+    </div>
+
+    <div class="right-menu">
+        <button id="themeSwitcher" class="theme-switcher">
+            <span id="themeIcon" class="theme-icon">☀</span>
+        </button>
+        <a href="/measure"><button class="nav-btn">Ввести данные</button></a>
+        <a href="/profile"><button class="nav-btn">Профиль</button></a>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="container">
+        <div class="card" style="animation: fadeIn 0.4s">
+            <h1>Nike ZoomX</h1>
+        </div>
+    </div>
+</div>
+
+<footer class="global-footer">by SneakerFit team © 2025</footer>
+<script src="{{ url_for('static', filename='js/theme-switcher.js') }}"></script>
+</body>
+</html>

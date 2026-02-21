@@ -1,0 +1,27 @@
+.error-message {
+    color: #d32f2f;
+    font-size: 14px;
+    margin-top: 5px;
+    display: none;
+}
+input:invalid {
+    border-color: #d32f2f;
+}
+
+[data-theme="soft"] .error-message,
+[data-theme="dark"] .error-message {
+    color: #ff6b6b;
+}
+
+[data-theme="soft"] input:invalid,
+[data-theme="dark"] input:invalid {
+    border-color: #ff6b6b;
+}
+.card p {
+    color: var(--text-color) !important;
+    opacity: 0.9;
+}
+
+.form-group label {
+    color: var(--text-color) !important;
+}

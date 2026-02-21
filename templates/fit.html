@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/fit.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Рекомендации по размеру</h1>
+    
+    <div class="filter-section" style="display: none;">
+        <div class="filter-row">
+            <div class="filter-group">
+                <label for="compatibilityFilter">Совместимость:</label>
+                <select id="compatibilityFilter" class="filter-select">
+                    <option value="all">Все</option>
+                    <option value="80">От 80%</option>
+                    <option value="60">От 60%</option>
+                    <option value="40">От 40%</option>
+                    <option value="20">От 20%</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="typeFilter">Тип обуви:</label>
+                <select id="typeFilter" class="filter-select">
+                    <option value="all">Все</option>
+                    <option value="sport">Спортивная</option>
+                    <option value="casual">Повседневная</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="sortFilter">Сортировка:</label>
+                <select id="sortFilter" class="filter-select">
+                    <option value="compatibility-desc">По совместимости (убыв.)</option>
+                    <option value="compatibility-asc">По совместимости (возр.)</option>
+                    <option value="name-asc">По названию (А-Я)</option>
+                    <option value="name-desc">По названию (Я-А)</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <button onclick="resetFilters()" class="btn btn-secondary">Сбросить</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="results-count" id="resultsCount">Загрузка рекомендаций...</div>
+    
+    <div id="recommendations-container">
+        <div class="loading-container">
+            <div class="spinner" style="margin: 20px auto;"></div>
+            <p>Загрузка рекомендаций...</p>
+        </div>
+    </div>
+    
+    <div class="show-more-container" id="showMoreContainer" style="display: none;">
+        <button id="showMoreBtn" class="btn btn-secondary">Показать еще</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/fit.js') }}"></script>
+{% endblock %}
