@@ -297,7 +297,15 @@ def get_recommendations():
 
 @app.route('/fit')
 def fit():
-    return render_template('fit.html')
+    user_data = get_user_measurements()
+    recommendations = []
+    
+    if user_data:
+        recommendations = find_best_matches(user_data)
+    
+    return render_template('fit.html', 
+                         user_measurements=user_data,
+                         recommendations=recommendations)
 
 @app.route('/about')
 def about():

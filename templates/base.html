@@ -3,6 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     {% if request.path == '/fit' %}
+    <script>
+    // Проверяем, обновляли ли мы уже страницу
+    if (!sessionStorage.getItem('fitPageRefreshed')) {
+        console.log('Первый заход на страницу рекомендаций, отмечаем флаг и обновляем');
+        sessionStorage.setItem('fitPageRefreshed', 'true');
+        setTimeout(() => {
+            location.reload();
+        }, 500);
+    } else {
+        console.log('Страница уже обновлялась, больше не обновляем');
+        // Можно очистить флаг через некоторое время
+        setTimeout(() => {
+            sessionStorage.removeItem('fitPageRefreshed');
+        }, 5000);
+    }
+    </script>
+    {% endif %}
+    
     <title>SneakerFit - Подбор обуви</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     {% block extra_css %}{% endblock %}

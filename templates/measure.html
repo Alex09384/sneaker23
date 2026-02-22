@@ -29,7 +29,7 @@
         </div>
         {% endif %}
 
-        <form id="measureForm" method="POST" action="/measure">
+        <form id="measureForm" method="POST" action="/measure" onsubmit="setTimeout(() => window.location.href='/fit', 500)">
             <div class="form-group">
                 <label for="length">Длина стопы (см):</label>
                 <input type="number" id="length" name="length" step="0.1" min="15" max="40" value="{{ user_measurements.foot_length if user_measurements else '' }}" required>
@@ -59,7 +59,7 @@
                 <div class="error-message" id="footTypeError">Выберите тип стопы</div>
             </div>
 
-            <button type="submit" class="btn btn-primary" style="width: 100%;">Сохранить и перейти к рекомендациям</button>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Сохранить измерения</button>
         </form>
     </div>
 </div>
@@ -83,5 +83,9 @@ async function clearMeasurements() {
 {% endblock %}
 
 {% block extra_js %}
-<script src="{{ url_for('static', filename='js/measure.js') }}"></script>
+<script>
+document.getElementById('measureForm').addEventListener('submit', function() {
+    sessionStorage.setItem('measurementsUpdated', 'true');
+});
+</script>
 {% endblock %}
